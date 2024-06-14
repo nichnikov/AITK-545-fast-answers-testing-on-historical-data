@@ -1,0 +1,12 @@
+{
+  "stopwords_files": ["greetings.csv", "stopwords.csv"],
+  "clusters_index": "clusters_auto",
+  "answers_index": "answers_auto",
+  "max_hits": 300,
+  "chunk_size": 500,
+  "sbert_score": 0.0,
+  "t5_score": 0.0,
+  "candidates_quantity": 30,
+  "host": "0.0.0.0", 
+  "port": 8090
+}

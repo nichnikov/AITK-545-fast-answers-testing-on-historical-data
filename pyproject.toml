@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "aitk-545-fast-answers-testing-on-historical-data"
+version = "0.1.0"
+description = ""
+authors = ["nichnikov <a.nichnikov@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pybind11 = "^2.12.0"
+python-dotenv = "^1.0.1"
+pandas = "^2.2.2"
+pymystem3 = "^0.2.0"
+scikit-learn = "^1.5.0"
+elasticsearch = "^8.14.0"
+pydantic = "^2.7.4"
+aiohttp = "^3.9.5"
+uvicorn = "^0.30.1"
+fastapi = "^0.111.0"
+fastapi-utils = "^0.7.0"
+urllib3 = "^2.2.1"
+sentence-transformers = "^3.0.1"
+pydantic-settings = "^2.3.3"
+sentencepiece = "^0.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
