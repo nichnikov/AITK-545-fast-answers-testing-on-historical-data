@@ -34,7 +34,8 @@ class FastAnswerClassifier:
         self.t5_tkz = t5_tokenizer
 
     async def get_answer(self, templateId, pubid):
-        answer_query = {"bool": {"must": [{"match_phrase": {"templateId": templateId}}, {"match_phrase": {"pubId": pubid}},]}}
+        # answer_query = {"bool": {"must": [{"match_phrase": {"templateId": templateId}}, {"match_phrase": {"pubId": pubid}},]}}
+        answer_query = {"bool": {"must": [{"match_phrase": {"templateId": templateId}}]}}
         resp = await self.es.search_by_query(self.prm.answers_index, answer_query)
         if resp["hits"]["hits"]:
             search_result = search_result_rep(resp["hits"]["hits"])
@@ -44,7 +45,7 @@ class FastAnswerClassifier:
             logger.info("not found answer with templateId {} and pub_id {}".format(str(templateId), str(pubid)))
             return empty_result
     
-    def sbert_ranging(self, lem_query: str, score: float, candidates: []):
+    def sbert_ranging(self, lem_query: str, score: float, candidates: list):
         text_emb = self.sbert_model.encode(lem_query)
         ids, ets, lm_ets, answs = zip(*candidates)
         candidate_embs = self.sbert_model.encode(lm_ets)
@@ -80,8 +81,8 @@ class FastAnswerClassifier:
             tokens = self.tkz([text])
             if tokens[0]:
                 tokens_str = " ".join(tokens[0])
-                search_query={"bool": {"must": [{"match_phrase": {"ParentPubList": pubid}}, 
-                                            {"match": {"LemCluster": tokens_str}}]}}
+                # search_query={"bool": {"must": [{"match_phrase": {"ParentPubList": pubid}}, {"match": {"LemCluster": tokens_str}}]}}
+                search_query={"bool": {"must": [{"match": {"LemCluster": tokens_str}}]}}
                 search_result = await self.es.search_by_query(self.prm.clusters_index, query=search_query)
                 if search_result["hits"]["hits"]:
                     result_dicts = search_result_rep(search_result["hits"]["hits"])

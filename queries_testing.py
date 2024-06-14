@@ -4,14 +4,15 @@ from random import shuffle
 import pandas as pd
 import requests
 
-queies_df = pd.read_csv(os.path.join("data", "aitk545_testing_queries.csv"), sep="\t")
+queies_df = pd.read_csv(os.path.join("data", "aitk545_testing_queries.csv"))
 print(queies_df)
 print(queies_df.info())
 
-queies_dicts = queies_df[queies_df["text_len"] >= 10].to_dict(orient="records")
+# queies_dicts = queies_df[queies_df["text_len"] >= 10].to_dict(orient="records")
+queies_dicts = queies_df.to_dict(orient="records")
 shuffle(queies_dicts)
 
-test_quantity = 10000
+test_quantity = 25000
 
 test_results = []
 for num, d in enumerate(queies_dicts[:test_quantity]):
@@ -25,4 +26,4 @@ for num, d in enumerate(queies_dicts[:test_quantity]):
 
 test_results_df = pd.DataFrame(test_results)
 print(test_results_df)
-test_results_df.to_csv(os.path.join("results", "bss_queries_testing_240402.csv"), sep="\t", index=False)
+test_results_df.to_csv(os.path.join("results", "aitk545_queries_testing.csv"), sep="\t", index=False)
